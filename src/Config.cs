@@ -143,11 +143,9 @@ public class GPDuelConfig : BasePluginConfig
         "mp_endmatch_votenextmap 0",
         "mp_match_end_changelevel 0",
         "mp_match_end_restart 0",
-        "mp_disable_respawn_times 1",
         "spec_freeze_time 0",
         "spec_freeze_time_lock 0",
         "spec_freeze_deathanim_time 0",
-        "sv_infinite_ammo 2",
         "sv_hibernate_when_empty 0",
     ];
 
