@@ -1,0 +1,34 @@
+name: Build GP_Duel
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Build
+        run: dotnet build GP_Duel.csproj -c Release -o out
+
+      - name: Package
+        run: |
+          P=pkg/addons/counterstrikesharp/plugins/GP_Duel
+          mkdir -p "$P/spawns"
+          cp out/*.dll "$P/"
+          rm -f "$P/CounterStrikeSharp.API.dll"
+          cp out/GP_Duel.deps.json "$P/" 2>/dev/null || true
+          cp spawns/*.txt "$P/spawns/"
+          ls -R pkg
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: GP_Duel
+          path: pkg
